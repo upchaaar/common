@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
-public class EventEnvelop<T> {
+public class EventEnvelope<T> {
 
     @Builder.Default
     String eventId = UUID.randomUUID().toString();
@@ -27,8 +27,8 @@ public class EventEnvelop<T> {
     String userId;
     T payload;
 
-    public static <T> EventEnvelop<T> of(String eventType, String version, String tenantId, T payload) {
-        return EventEnvelop.<T>builder()
+    public static <T> EventEnvelope<T> of(String eventType, String version, String tenantId, T payload) {
+        return EventEnvelope.<T>builder()
                 .eventType(eventType)
                 .version(version)
                 .tenantId(tenantId)

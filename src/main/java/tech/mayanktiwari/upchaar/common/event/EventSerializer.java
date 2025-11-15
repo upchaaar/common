@@ -16,9 +16,9 @@ public class EventSerializer {
     /**
      * Serialize event envelope to JSON string
      */
-    public static String serialize(EventEnvelop<?> eventEnvelop) {
+    public static String serialize(EventEnvelope<?> eventEnvelope) {
         try {
-            String json = objectMapper.writeValueAsString(eventEnvelop);
+            String json = objectMapper.writeValueAsString(eventEnvelope);
             log.debug("Serialized event: {}", json);
             return json;
         } catch (JsonProcessingException e) {
@@ -30,12 +30,12 @@ public class EventSerializer {
     /**
      * Deserialize JSON string to event envelope
      */
-    public static <T> EventEnvelop<T> deserialize(String json, Class<T> eventType) {
+    public static <T> EventEnvelope<T> deserialize(String json, Class<T> eventType) {
         try {
-            EventEnvelop<T> eventEnvelop = objectMapper.readValue(json,
-                    objectMapper.getTypeFactory().constructParametricType(EventEnvelop.class, eventType));
-            log.debug("Deserialized event: {}", eventEnvelop);
-            return eventEnvelop;
+            EventEnvelope<T> eventEnvelope = objectMapper.readValue(json,
+                    objectMapper.getTypeFactory().constructParametricType(EventEnvelope.class, eventType));
+            log.debug("Deserialized event: {}", eventEnvelope);
+            return eventEnvelope;
         } catch (JsonProcessingException e) {
             log.error("Failed to deserialize event: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to deserialize event", e);
