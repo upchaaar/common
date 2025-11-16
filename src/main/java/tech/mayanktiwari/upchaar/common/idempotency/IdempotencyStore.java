@@ -1,33 +1,24 @@
 package tech.mayanktiwari.upchaar.common.idempotency;
 
+import java.time.Instant;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.time.Instant;
-import java.util.Optional;
-
 public interface IdempotencyStore {
-    /**
-     * Save an idempotency record
-     */
+    /** Save an idempotency record */
     void save(IdempotencyRecord record);
 
-    /**
-     * Find an existing idempotency record by key
-     */
+    /** Find an existing idempotency record by key */
     Optional<IdempotencyRecord> findByKey(String tenantId, String idempotencyKey);
 
-    /**
-     * Check if a key exists
-     */
+    /** Check if a key exists */
     boolean exists(String tenantId, String idempotencyKey);
 
-    /**
-     * Delete expired records
-     */
+    /** Delete expired records */
     void deleteExpired();
 
     @Data

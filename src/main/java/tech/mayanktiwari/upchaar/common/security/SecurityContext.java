@@ -13,9 +13,7 @@ public class SecurityContext {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
-    /**
-     * Set the user context for the current thread
-     */
+    /** Set the user context for the current thread */
     public static void setUserContext(String userId, String role) {
         if (userId == null || userId.isBlank()) {
             log.warn("Attempted to set null or blank user ID");
@@ -30,32 +28,24 @@ public class SecurityContext {
         return context != null ? context.getUserId() : null;
     }
 
-    /**
-     * Get the current user role
-     */
+    /** Get the current user role */
     public static String getRole() {
         UserContext context = USER_CONTEXT.get();
         return context != null ? context.getRole() : null;
     }
 
-    /**
-     * Check if user context is set
-     */
+    /** Check if user context is set */
     public static boolean isSet() {
         return USER_CONTEXT.get() != null;
     }
 
-    /**
-     * Clear the user context (important for thread pool reuse)
-     */
+    /** Clear the user context (important for thread pool reuse) */
     public static void clear() {
         USER_CONTEXT.remove();
         log.debug("User context cleared");
     }
 
-    /**
-     * Validate that user context is set, throw exception if not
-     */
+    /** Validate that user context is set, throw exception if not */
     public static void requireUser() {
         if (!isSet()) {
             throw new IllegalStateException("User context is not set");

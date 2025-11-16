@@ -32,8 +32,9 @@ public class EventSerializer {
      */
     public static <T> EventEnvelope<T> deserialize(String json, Class<T> eventType) {
         try {
-            EventEnvelope<T> eventEnvelope = objectMapper.readValue(json,
-                    objectMapper.getTypeFactory().constructParametricType(EventEnvelope.class, eventType));
+            EventEnvelope<T> eventEnvelope = objectMapper.readValue(json, objectMapper.getTypeFactory()
+                                                                                      .constructParametricType(EventEnvelope.class,
+                                                                                                               eventType));
             log.debug("Deserialized event: {}", eventEnvelope);
             return eventEnvelope;
         } catch (JsonProcessingException e) {

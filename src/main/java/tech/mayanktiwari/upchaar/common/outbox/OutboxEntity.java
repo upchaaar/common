@@ -7,19 +7,17 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "outbox", indexes = {
-        @Index(name = "idx_outbox_published", columnList = "published_at"),
-        @Index(name = "idx_outbox_created", columnList = "created_at"),
-        @Index(name = "idx_outbox_tenant", columnList = "tenant_id"),
-        @Index(name = "idx_outbox_status", columnList = "status")
-})
+@Table(name = "outbox",
+       indexes = { @Index(name = "idx_outbox_published", columnList = "published_at"),
+                   @Index(name = "idx_outbox_created", columnList = "created_at"),
+                   @Index(name = "idx_outbox_tenant", columnList = "tenant_id"),
+                   @Index(name = "idx_outbox_status", columnList = "status") })
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class OutboxEntity {
-
     @Id
     @Column(columnDefinition = "VARCHAR(36)")
     private String id;
@@ -73,7 +71,8 @@ public class OutboxEntity {
     @PrePersist
     void prePersist() {
         if (id == null) {
-            id = UUID.randomUUID().toString();
+            id = UUID.randomUUID()
+                     .toString();
         }
         if (createdAt == null) {
             createdAt = Instant.now();
@@ -90,9 +89,9 @@ public class OutboxEntity {
      * Outbox record status
      */
     public enum OutboxStatus {
-        PENDING,      // Not yet published
-        PUBLISHED,    // Successfully published
-        FAILED,       // Max retries exceeded
-        PROCESSING    // Currently being processed
+        PENDING, // Not yet published
+        PUBLISHED, // Successfully published
+        FAILED, // Max retries exceeded
+        PROCESSING // Currently being processed
     }
 }
