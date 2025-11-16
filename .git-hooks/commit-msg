@@ -1,0 +1,25 @@
+#!/bin/sh
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(head -n 1 "$COMMIT_MSG_FILE")
+
+echo "$COMMIT_MSG" | grep -Eq "^(feat|fix|chore|refactor|docs|test)(\(.+\))?: .+"
+STATUS=$?
+
+if [ $STATUS -ne 0 ]; then
+  echo ""
+  echo "❌ Invalid commit message!"
+  echo "Your commit message must follow Conventional Commits:"
+  echo ""
+  echo "   feat: add login flow"
+  echo "   fix(auth): wrong token expiry"
+  echo "   chore: update dependencies"
+  echo "   refactor(user): simplify logic"
+  echo ""
+  echo "👉 Example: feat: add user registration API"
+  echo ""
+  exit 1
+fi
+
+echo "✅ Commit message valid!"
+exit 0

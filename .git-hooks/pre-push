@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo "🔨 Running Maven build..."
+./mvnw -q clean verify
+
+if [ $? -ne 0 ]; then
+  echo "❌ Build failed — push blocked."
+  exit 1
+fi
+
+echo "✓ Build OK — push allowed"
+exit 0

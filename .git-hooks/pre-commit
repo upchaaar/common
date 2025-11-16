@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo "🔍 Running code style checks (Spotless)…"
+
+mvn -q spotless:check
+STATUS=$?
+
+if [ $STATUS -ne 0 ]; then
+  echo ""
+  echo "❌ Spotless check failed!"
+  echo "Your code is not properly formatted."
+  echo ""
+  echo "👉 Please run: mvn spotless:apply"
+  echo "Then stage your changes again and retry commit."
+  echo ""
+  exit 1
+fi
+
+echo "✅ Formatting OK!"
+
+exit 0
