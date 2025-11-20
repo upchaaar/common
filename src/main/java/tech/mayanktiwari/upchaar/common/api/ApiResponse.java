@@ -17,16 +17,16 @@ public class ApiResponse<T> {
 
     public static <T> ApiResponse<T> success(T data) {
         return ApiResponse.<T>builder()
-                .success(true)
-                .data(data)
-                .build();
+                          .success(true)
+                          .data(data)
+                          .build();
     }
 
     public static <T> ApiResponse<T> success(T data, String message) {
         return ApiResponse.<T>builder()
-                .success(true)
-                .data(data)
-                .message(message)
-                .build();
+                          .success(true)
+                          .data(data)
+                          .message(message)
+                          .build();
     }
 }

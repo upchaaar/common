@@ -22,11 +22,11 @@ public class ApiError {
 
     public static ApiError of(int status, String title, String details) {
         return ApiError.builder()
-                .status(status)
-                .title(title)
-                .detail(details)
-                .timestamp(Instant.now())
-                .type("error")
-                .build();
+                       .status(status)
+                       .title(title)
+                       .detail(details)
+                       .timestamp(Instant.now())
+                       .type("error")
+                       .build();
     }
 }

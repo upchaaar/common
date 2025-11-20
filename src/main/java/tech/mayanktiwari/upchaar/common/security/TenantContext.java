@@ -1,8 +1,7 @@
 package tech.mayanktiwari.upchaar.common.security;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.Objects;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public final class TenantContext {
@@ -12,23 +11,17 @@ public final class TenantContext {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
-    /**
-     * Check if tenant context is set
-     */
+    /** Check if tenant context is set */
     public static boolean isSet() {
         return TENANT_ID.get() != null;
     }
 
-    /**
-     * Get the tenant ID for the current thread
-     */
+    /** Get the tenant ID for the current thread */
     public static String getTenantId() {
         return TENANT_ID.get();
     }
 
-    /**
-     * Set the tenant ID for the current thread
-     */
+    /** Set the tenant ID for the current thread */
     public static void setTenantId(String tenantId) {
         if (Objects.isNull(tenantId) || tenantId.isBlank()) {
             log.warn("Attempted to set null or blank tenant ID");
@@ -39,17 +32,13 @@ public final class TenantContext {
         }
     }
 
-    /**
-     * Clear the tenant context (important for thread pool reuse)
-     */
+    /** Clear the tenant context (important for thread pool reuse) */
     public static void clear() {
         TENANT_ID.remove();
         log.debug("Tenant context cleared");
     }
 
-    /**
-     * Validate that tenant context is set, throw exception if not
-     */
+    /** Validate that tenant context is set, throw exception if not */
     public static void requireTenant() {
         if (!isSet()) {
             throw new IllegalStateException("Tenant context is not set");

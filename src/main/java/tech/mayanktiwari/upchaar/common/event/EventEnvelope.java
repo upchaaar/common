@@ -15,9 +15,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
 public class EventEnvelope<T> {
-
     @Builder.Default
-    String eventId = UUID.randomUUID().toString();
+    String eventId = UUID.randomUUID()
+                         .toString();
     String eventType;
     String version;
     String tenantId;
@@ -29,10 +29,10 @@ public class EventEnvelope<T> {
 
     public static <T> EventEnvelope<T> of(String eventType, String version, String tenantId, T payload) {
         return EventEnvelope.<T>builder()
-                .eventType(eventType)
-                .version(version)
-                .tenantId(tenantId)
-                .payload(payload)
-                .build();
+                            .eventType(eventType)
+                            .version(version)
+                            .tenantId(tenantId)
+                            .payload(payload)
+                            .build();
     }
 }
